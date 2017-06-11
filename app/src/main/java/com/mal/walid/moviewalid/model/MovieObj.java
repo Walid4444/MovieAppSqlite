@@ -71,7 +71,6 @@ public class MovieObj  extends RealmObject implements Serializable {
         return Movie_rate;
     }
 
-    public void setMovie_rate(int movie_rate) {
-        Movie_rate = movie_rate;
+    public void setMovie_rate(int movie_rate) { Movie_rate = movie_rate;
     }
 }

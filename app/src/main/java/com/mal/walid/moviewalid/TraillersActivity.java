@@ -18,8 +18,8 @@ import java.util.ArrayList;
 
 public class TraillersActivity extends AppCompatActivity {
 
-    static ArrayList<TraillerObj> TraillerList = new ArrayList<TraillerObj>();
-    static TraillerArrayAdapter adapter;
+    public static ArrayList<TraillerObj> TraillerList = new ArrayList<TraillerObj>();
+    public static TraillerArrayAdapter adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -16,8 +16,8 @@ import java.util.ArrayList;
 
 public class ReviewActivity extends AppCompatActivity {
 
-    static ArrayList<ReviewObj> ReviewList = new ArrayList<ReviewObj>();
-    static ReviewArrayAdapter adapter;
+    public static ArrayList<ReviewObj> ReviewList = new ArrayList<ReviewObj>();
+    public static ReviewArrayAdapter adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
