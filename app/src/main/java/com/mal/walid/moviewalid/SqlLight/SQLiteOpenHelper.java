@@ -15,8 +15,6 @@ public class SQLiteOpenHelper extends android.database.sqlite.SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "MoviesDB.db";
     private static final int DATABASE_VERSION = 1;
-    String s;
-
 
     @Override
     public void onCreate(SQLiteDatabase db) {
