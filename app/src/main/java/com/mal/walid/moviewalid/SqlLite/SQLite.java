@@ -1,4 +1,4 @@
-package com.mal.walid.moviewalid.SqlLight;
+package com.mal.walid.moviewalid.SqlLite;
 
 
 import android.content.ContentValues;
@@ -71,19 +71,67 @@ public class SQLite extends android.database.sqlite.SQLiteOpenHelper {
         cursor.moveToFirst();
 
         while (cursor.moveToNext()) {
-        MovieObj obj = new MovieObj();
+            MovieObj obj = new MovieObj();
 
-        obj.setMovie_id(Integer.parseInt(cursor.getString(0)));
-        obj.setMovie_name(cursor.getString(1));
-        obj.setOverview_text(cursor.getString(2));
-        obj.setImage_film(cursor.getString(3));
-        obj.setImg_poster(cursor.getString(4));
-        obj.setPublish_time(cursor.getString(5));
-        obj.setMovie_rate(Integer.parseInt(cursor.getString(6)));
+            obj.setMovie_id(Integer.parseInt(cursor.getString(0)));
+            obj.setMovie_name(cursor.getString(1));
+            obj.setOverview_text(cursor.getString(2));
+            obj.setImage_film(cursor.getString(3));
+            obj.setImg_poster(cursor.getString(4));
+            obj.setPublish_time(cursor.getString(5));
+            obj.setMovie_rate(Integer.parseInt(cursor.getString(6)));
 
-        Movies.add(obj);
+            Movies.add(obj);
         }
 
         return Movies;
     }
+
+    public ArrayList getMovie(int id) {
+        ArrayList Movies = new ArrayList();
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        Cursor cursor = db.rawQuery("SELECT  * FROM MovieData WHERE " + MovieDataContract.MovieDataEntity.Movie_ID + "=" + id, null);
+        cursor.moveToFirst();
+
+        while (cursor.moveToNext()) {
+            MovieObj obj = new MovieObj();
+
+            obj.setMovie_id(Integer.parseInt(cursor.getString(0)));
+            obj.setMovie_name(cursor.getString(1));
+            obj.setOverview_text(cursor.getString(2));
+            obj.setImage_film(cursor.getString(3));
+            obj.setImg_poster(cursor.getString(4));
+            obj.setPublish_time(cursor.getString(5));
+            obj.setMovie_rate(Integer.parseInt(cursor.getString(6)));
+
+            Movies.add(obj);
+        }
+
+        return Movies;
     }
+
+    public MovieObj getMovieData(int id) {
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        Cursor cursor = db.rawQuery("SELECT * FROM "+ MovieDataContract.MovieDataEntity.TABLE_NAME + " WHERE "
+                + MovieDataContract.MovieDataEntity.Movie_ID + " = " + MovieDataContract.MovieDataEntity.Movie_ID + " LIKE  '"+ id +"%'", null);
+
+        MovieObj obj = new MovieObj();
+
+        while (cursor.moveToNext()) {
+
+            obj.setMovie_id(Integer.parseInt(cursor.getString(0)));
+            obj.setMovie_name(cursor.getString(1));
+            obj.setOverview_text(cursor.getString(2));
+            obj.setImage_film(cursor.getString(3));
+            obj.setImg_poster(cursor.getString(4));
+            obj.setPublish_time(cursor.getString(5));
+            obj.setMovie_rate(Integer.parseInt(cursor.getString(6)));
+        }
+
+        return obj;
+    }
+}

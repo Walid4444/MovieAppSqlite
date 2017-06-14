@@ -3,7 +3,6 @@ package com.mal.walid.moviewalid.Fragment;
 import android.app.Fragment;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.res.ColorStateList;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -21,7 +20,7 @@ import android.widget.TextView;
 import com.mal.walid.moviewalid.MainActivity;
 import com.mal.walid.moviewalid.R;
 import com.mal.walid.moviewalid.ReviewActivity;
-import com.mal.walid.moviewalid.SqlLight.SQLite;
+import com.mal.walid.moviewalid.SqlLite.SQLite;
 import com.mal.walid.moviewalid.TraillersActivity;
 import com.mal.walid.moviewalid.model.MovieObj;
 import com.squareup.picasso.Picasso;
@@ -36,6 +35,7 @@ public class DetailesFragment extends Fragment {
     String sortedBy;
     Bundle bundle;
 
+    SQLite sqLite;
 
 
     @Override
@@ -46,10 +46,10 @@ public class DetailesFragment extends Fragment {
         sortedBy = getData.getString("sortedby", "popular");
         obj = (MovieObj) bundle.getSerializable("Movie");
 
-        if (sortedBy.equals("favourite") || obj == null || getActivity().getIntent().getIntExtra("testID",0) !=0) {
-            //MovieID=getActivity().getIntent().getIntExtra("MovieID",0);
-            //obj = MainActivity.realm.where(MovieObj.class).equalTo("Movie_id", MovieID).findFirst();
-        }
+        /*if (sortedBy.equals("favourite") || obj == null || getActivity().getIntent().getIntExtra("testID",0) !=0) {
+            MovieID=getActivity().getIntent().getIntExtra("MovieID",0);
+            obj = MainActivity.realm.where(MovieObj.class).equalTo("Movie_id", MovieID).findFirst();
+        }*/
 
 
             Toolbar toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
@@ -57,9 +57,11 @@ public class DetailesFragment extends Fragment {
 
         MovieID = obj.getMovie_id();
 
+
         final FloatingActionButton fab = (FloatingActionButton) getActivity().findViewById(R.id.fab);
-        if( MainActivity.realm.where(MovieObj.class).equalTo("Movie_id",MovieID).count() >0)
-            fab.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.colorSaved)));
+
+        /*if(sqLite.getMovieData(MovieID) != null)
+            fab.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.colorSaved)));*/
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,7 +78,7 @@ public class DetailesFragment extends Fragment {
             }
         });
 
-        if ( MainActivity.realm.where(MovieObj.class).equalTo("Movie_id", obj.getMovie_id()).count() > 0){
+        if (MainActivity.realm.where(MovieObj.class).equalTo("Movie_id", obj.getMovie_id()).count() > 0){
             fab.setImageDrawable(getResources().getDrawable(R.drawable.star_filled));
         }
 

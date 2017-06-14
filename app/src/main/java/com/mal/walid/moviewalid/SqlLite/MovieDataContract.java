@@ -1,4 +1,4 @@
-package com.mal.walid.moviewalid.SqlLight;
+package com.mal.walid.moviewalid.SqlLite;
 
 import android.provider.BaseColumns;
 
@@ -19,9 +19,6 @@ public class MovieDataContract {
         final static String publish_time = "MoviePublishDate";
         final static String image_film = "MovieImg";
         final static String Movie_rate = "MovieRate";
-
-
-
 
     }
 }

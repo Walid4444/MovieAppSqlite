@@ -14,7 +14,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.mal.walid.moviewalid.Fragment.MainActivityFragment;
 import com.mal.walid.moviewalid.MainActivity;
-import com.mal.walid.moviewalid.SqlLight.SQLite;
+import com.mal.walid.moviewalid.SqlLite.SQLite;
 import com.mal.walid.moviewalid.model.MovieObj;
 
 import org.json.JSONObject;
