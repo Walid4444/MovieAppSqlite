@@ -7,7 +7,6 @@ import android.preference.PreferenceManager;
 import android.support.design.widget.Snackbar;
 import android.view.View;
 
-
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -15,11 +14,12 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.mal.walid.moviewalid.Fragment.MainActivityFragment;
 import com.mal.walid.moviewalid.MainActivity;
+import com.mal.walid.moviewalid.SqlLight.SQLite;
 import com.mal.walid.moviewalid.model.MovieObj;
 
 import org.json.JSONObject;
 
-import io.realm.RealmResults;
+import java.util.ArrayList;
 
 /**
  * Created by walid4444 on 9/3/16.
@@ -87,7 +87,8 @@ public class JsonParsing {
     }
 
     protected static void DatabaseFetch() {
-        RealmResults<MovieObj> result =  MainActivity.realm.where(MovieObj.class).findAll();
+        SQLite sqLite = new SQLite(mContext);
+        ArrayList<MovieObj> result = sqLite.getAllMovies() ;
         MainActivityFragment.MovieArray.clear();
         for (int i = 0;i < result.size();i++){
             MainActivityFragment.MovieArray.add(result.get(i));

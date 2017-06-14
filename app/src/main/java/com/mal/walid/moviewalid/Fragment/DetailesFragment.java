@@ -21,11 +21,10 @@ import android.widget.TextView;
 import com.mal.walid.moviewalid.MainActivity;
 import com.mal.walid.moviewalid.R;
 import com.mal.walid.moviewalid.ReviewActivity;
+import com.mal.walid.moviewalid.SqlLight.SQLite;
 import com.mal.walid.moviewalid.TraillersActivity;
 import com.mal.walid.moviewalid.model.MovieObj;
 import com.squareup.picasso.Picasso;
-
-import io.realm.Realm;
 
 /**
  * Created by walid4444 on 9/16/16.
@@ -48,8 +47,8 @@ public class DetailesFragment extends Fragment {
         obj = (MovieObj) bundle.getSerializable("Movie");
 
         if (sortedBy.equals("favourite") || obj == null || getActivity().getIntent().getIntExtra("testID",0) !=0) {
-            MovieID=getActivity().getIntent().getIntExtra("MovieID",0);
-            obj = MainActivity.realm.where(MovieObj.class).equalTo("Movie_id", MovieID).findFirst();
+            //MovieID=getActivity().getIntent().getIntExtra("MovieID",0);
+            //obj = MainActivity.realm.where(MovieObj.class).equalTo("Movie_id", MovieID).findFirst();
         }
 
 
@@ -67,16 +66,12 @@ public class DetailesFragment extends Fragment {
             public void onClick(View view) {
 
                 if (MainActivity.realm.where(MovieObj.class).equalTo("Movie_id", obj.getMovie_id()).count() == 0) {
-                    MainActivity.realm.executeTransaction(new Realm.Transaction() {
-                        @Override
-                        public void execute(Realm realm) {
-                            MainActivity.realm.copyToRealm(obj);
-                        }
-                    });
+                    SQLite SQLite = new SQLite(getActivity());
+                    SQLite.insert(obj.getMovie_name().toString(),obj.getMovie_id(),obj.getMovie_rate(),
+                            obj.getOverview_text().toString(),obj.getImg_poster().toString(),
+                            obj.getImage_film().toString(),obj.getPublish_time().toString());
                     Snackbar.make(view, "added to favourite", Snackbar.LENGTH_LONG)
                             .setAction("Action", null).show();
-
-
                 }
             }
         });

@@ -18,6 +18,15 @@ public class MovieObj  extends RealmObject implements Serializable {
     public MovieObj() {
     }
 
+    public MovieObj(String name,int id,int rate, String overview,String imgPosterUrl,String imgUrl,String time) {
+        this.Movie_id = id;
+        this.Movie_name = name;
+        this.Overview_text = overview;
+        this.Img_poster = imgPosterUrl;
+        this.image_film = imgUrl;
+        this.Movie_rate = rate;
+        this.publish_time = time;
+    }
 
     public int getMovie_id() {
         return Movie_id;
